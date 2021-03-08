@@ -1,3 +1,23 @@
-site_name: My Docs
+site_name: Intro to Theory of Computation
+repo_url: https://github.com/chuan-325/tcs-20sp
+repo_name: chuan-325/tcs-20sp
+nav:
+  - Home: index.md
+  - Chapter 00 绪论: chap_00.md
+  - Chapter 01 正则语言: chap_01.md
 theme:
   name: material
+  palette:
+    primary: brown
+  language: zh
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+      toc_depth: 4
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
