@@ -33,4 +33,4 @@ This is a course note collection for **INTRODUCTION OF THEORETICAL COMPUTATION (
 
 ## Further Information
 
-For further information, plz contact me at zxz9325[AT]outlook.com .
+For further information, please contact me at zxz9325[AT]outlook.com .
