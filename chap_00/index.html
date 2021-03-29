@@ -1,0 +1,628 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.7">
+    
+    
+      
+        <title>Chapter 00 绪论 - Notes for Introduction to Theory of Computation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.c772ddf0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-00" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Notes for Introduction to Theory of Computation" class="md-header__button md-logo" aria-label="Notes for Introduction to Theory of Computation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes for Introduction to Theory of Computation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 00 绪论
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/chuan-325/itc-20sp/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chuan-325/itc-20sp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Notes for Introduction to Theory of Computation" class="md-nav__button md-logo" aria-label="Notes for Introduction to Theory of Computation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes for Introduction to Theory of Computation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/chuan-325/itc-20sp/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chuan-325/itc-20sp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 00 绪论
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chapter 00 绪论
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    字母表和字符串
+  </a>
+  
+    <nav class="md-nav" aria-label="字母表和字符串">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    定义 (字母表和字符串)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    字符串的运算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    语言
+  </a>
+  
+    <nav class="md-nav" aria-label="语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    定义 (语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    语言的运算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    定义 (字符串的序)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    语言的表示
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap_01/" class="md-nav__link">
+        Chapter 01 正则语言
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    字母表和字符串
+  </a>
+  
+    <nav class="md-nav" aria-label="字母表和字符串">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    定义 (字母表和字符串)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    字符串的运算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    语言
+  </a>
+  
+    <nav class="md-nav" aria-label="语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    定义 (语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    语言的运算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    定义 (字符串的序)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    语言的表示
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/chuan-325/itc-20sp/edit/master/docs/chap_00.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="chapter-00">Chapter 00: 数学概念与术语<a class="headerlink" href="#chapter-00" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Lecture 01: 绪论、有穷状态自动机 (2020-02-26)</p>
+<p>内容提要: 数学概念与术语, 有穷自动机, 正则语言.</p>
+</blockquote>
+<p>出现的概念: <span class="arithmatex">\(n\)</span>-元组, 字母表, 字符串.</p>
+<blockquote>
+<p><span class="arithmatex">\(n\)</span>-元组: <span class="arithmatex">\(n\)</span> 个元素的序列 <span class="arithmatex">\((A_1,A_2,\cdots,A_n)\)</span> . 常用来定义包含多个成分的数学概念.</p>
+</blockquote>
+<h3 id="_1">字母表和字符串<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">定义 (字母表和字符串)<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>字母表: 任意非空有穷集合 <span class="arithmatex">\(\Sigma\)</span>.</p>
+<blockquote>
+<p>例如 <span class="arithmatex">\(\Sigma=\{a,b,c,\cdots,x,y,z,\)</span> 空格 <span class="arithmatex">\(\}\)</span> .</p>
+</blockquote>
+<p>(字符) 串: 由字母表中的元素构成.</p>
+<blockquote>
+<p>例如 <span class="arithmatex">\(x=abdk,q=mdmd\)</span> .</p>
+</blockquote>
+<p>字符串 <span class="arithmatex">\(w\)</span> 的长度: 字符串 <span class="arithmatex">\(w\)</span> 里包含符号的个数, 记为 <span class="arithmatex">\(|w|\)</span> .</p>
+<blockquote>
+<p>例如 <span class="arithmatex">\(|x|=4\)</span> .</p>
+</blockquote>
+<p>空串 <span class="arithmatex">\(\epsilon\)</span> : 字母个数为 <span class="arithmatex">\(0\)</span> 的字符串, 因此有 <span class="arithmatex">\(|\epsilon|=0\)</span> .</p>
+<blockquote>
+<p>例如 <span class="arithmatex">\(x^0=\epsilon\)</span> . ( notice: 空串 <span class="arithmatex">\(\neq\)</span> 空格)</p>
+</blockquote>
+<p>子串: 从一个字符串里连续取出的一个字符串.</p>
+<blockquote>
+<p>例如: <span class="arithmatex">\(madam\Rightarrow ada\)</span> .</p>
+</blockquote>
+<p>(不常考虑)子序列: 相较上文可以不连续的取法.</p>
+<blockquote>
+<p>例如: <span class="arithmatex">\(m,a,d,a,m\Rightarrow m,d,m\)</span> .</p>
+</blockquote>
+<h4 id="_3">字符串的运算<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>字符串 <span class="arithmatex">\(w\)</span> 的反转 <span class="arithmatex">\(w^R\)</span>:</p>
+<p>设 <span class="arithmatex">\(w=a_1a_2\cdots a_n\)</span> , 则 <span class="arithmatex">\(w^R=a_na_{n-1}\cdots a_1\)</span> .</p>
+<p>(字符串的) 连接:简单地将两个字符串相接.</p>
+<blockquote>
+<p>例如 <span class="arithmatex">\(xq=abdkmdmd, xx=x^2=abdkabdk\)</span> .</p>
+</blockquote>
+<p>次方运算: <span class="arithmatex">\(w^0=\epsilon,w^1=w,w^{n+1}=w^n\circ w\)</span> .</p>
+<!--formatting / 格式更改-->
+
+<h3 id="_4">语言<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_5">定义 (语言)<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>语言: 字母表 <span class="arithmatex">\(\Sigma\)</span> 上的一个语言是指 <span class="arithmatex">\(\Sigma\)</span> 上的字符串的一个集合.</p>
+<p>对于字母表 <span class="arithmatex">\(\Sigma\)</span>, 我们有以下几个特殊的语言:</p>
+<ul>
+<li><strong><span class="arithmatex">\(\Sigma^*=\{x|x\)</span> 为 <span class="arithmatex">\(\Sigma\)</span> 上有穷长度的串 <span class="arithmatex">\(\}\)</span></strong> (本课程的内容)</li>
+<li><span class="arithmatex">\(\Sigma^+=\{x|x\)</span> 为 <span class="arithmatex">\(\Sigma\)</span> 上正有穷长度的串 <span class="arithmatex">\(\}\)</span></li>
+<li><span class="arithmatex">\(\Sigma^{\prime}=\{x|x\)</span> 为 <span class="arithmatex">\(\Sigma\)</span> 上无穷长度的串 <span class="arithmatex">\(\}\)</span></li>
+</ul>
+<p>空语言: 空集 <span class="arithmatex">\(\emptyset\)</span>, 不含任何字符串的语言.</p>
+<blockquote>
+<p>空语言里面什么都没有~</p>
+</blockquote>
+<p>空串语言: <span class="arithmatex">\(\{\epsilon\}\)</span>, 区别于空语言的地方在于里面有空串 (即<span class="arithmatex">\(\epsilon\)</span>) .</p>
+<blockquote>
+<p>字符串和语言的一个小区别: 字符串是有穷长度, 但是语言可以是一个有穷集合, 也可以是一个无穷集合.</p>
+</blockquote>
+<h4 id="_6">语言的运算<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p><strong>交/并/补运算</strong>: 类似于集合运算的方式.</p>
+<ul>
+<li>交: <span class="arithmatex">\(L_1\cap L_2=\{u|u\in L_1,\text{且}u\in L_2\}.\)</span></li>
+<li>并: <span class="arithmatex">\(L_1\cap L_2=\{u|u\in L_1,\text{或}u\in L_2\}.\)</span></li>
+<li>补: <span class="arithmatex">\(\overline{L}=\{u|u\text{是}\Sigma\text{上的字符串, 但}u\notin L_2\}.\)</span></li>
+</ul>
+<p><strong>连接 (乘积) 运算</strong>: 对第一个语言中的每一个字符串, 将其跟第二个语言中的每一个字符串做连接, 得到的就是语言的连接.</p>
+<p><span class="arithmatex">\(AB=\{xy|x\in A, y\in B\}.\)</span></p>
+<blockquote>
+<p>连接运算需要注意的特殊情况:</p>
+<ol>
+<li><span class="arithmatex">\(\{\epsilon\}A=A\{\epsilon\}=A\)</span>,</li>
+<li><span class="arithmatex">\(\emptyset A=A\emptyset =\emptyset\)</span>.</li>
+</ol>
+</blockquote>
+<p><strong>指数运算</strong>: <span class="arithmatex">\(L^0=\{\epsilon\};L^n=L^{n-1}L,n\geq 1.\)</span></p>
+<p><strong>星号运算</strong>: <span class="arithmatex">\(L^{*}=\cup_{i=0}^{\infty}L^i=L^0\cup L^1\cup L^2\cup\cdots\cup L^i\cup\cdots\)</span></p>
+<blockquote>
+<p>由定义可知, 对于任意的语言 <span class="arithmatex">\(L\)</span>, 空串 <span class="arithmatex">\(\epsilon\)</span> 总在 <span class="arithmatex">\(L^{*}\)</span> 中.</p>
+</blockquote>
+<p>注意到星号运算只作用于一个语言, 是 <em>一元运算</em> . (其他几个运算符都是二元运算.)</p>
+<blockquote>
+<p>在<a href="#定义正则语言的正则运算">正则语言的正则运算</a>提到过本段.</p>
+</blockquote>
+<h4 id="_7">定义 (字符串的序)<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<h5 id="a">a. 标准序<a class="headerlink" href="#a" title="Permanent link">&para;</a></h5>
+<p>规则: (字符串) 先短后长, 等长的串逐位进行比较.</p>
+<h5 id="b">b. 字典序<a class="headerlink" href="#b" title="Permanent link">&para;</a></h5>
+<p>规则: 忽视字符串的长短, 直接逐位比较.</p>
+<blockquote>
+<p>注: 比较的依据是字母表中预定的字母序.</p>
+</blockquote>
+<h4 id="_8">语言的表示<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>列举法 (穷举该语言的所有字符串) ;</li>
+<li>利用性质特点表示 (类似于描述性的集合) ;</li>
+<li>利用文法 (生成) .</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href=".." class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../chap_01/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              Chapter 01 正则语言
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.65ce87ac.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1213 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.7">
+    
+    
+      
+        <title>Chapter 01 正则语言 - Notes for Introduction to Theory of Computation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.c772ddf0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Notes for Introduction to Theory of Computation" class="md-header__button md-logo" aria-label="Notes for Introduction to Theory of Computation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes for Introduction to Theory of Computation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 01 正则语言
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/chuan-325/itc-20sp/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chuan-325/itc-20sp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Notes for Introduction to Theory of Computation" class="md-nav__button md-logo" aria-label="Notes for Introduction to Theory of Computation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes for Introduction to Theory of Computation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/chuan-325/itc-20sp/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chuan-325/itc-20sp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chap_00/" class="md-nav__link">
+        Chapter 00 绪论
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 01 正则语言
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chapter 01 正则语言
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 有穷自动机
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 有穷自动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    初识有穷自动机
+  </a>
+  
+    <nav class="md-nav" aria-label="初识有穷自动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    定义 (有穷自动机)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    定义 (确定型有穷自动机 (DFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_1" class="md-nav__link">
+    定义 (DFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    正则语言及其运算
+  </a>
+  
+    <nav class="md-nav" aria-label="正则语言及其运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    定义 (正则语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    定义 (正则语言的正则运算)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    定义 (正则语言的封闭性)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    定理 (正则语言的封闭性)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-nfa" class="md-nav__link">
+    1.2 非确定型有限状态自动机 (NFA)
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 非确定型有限状态自动机 (NFA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    非确定性
+  </a>
+  
+    <nav class="md-nav" aria-label="非确定性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfa-nfa" class="md-nav__link">
+    DFA 与 NFA 的区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa" class="md-nav__link">
+    定义 (NFA 的计算)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_1" class="md-nav__link">
+    定义 (非确定型有穷自动机 (NFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_2" class="md-nav__link">
+    定义 (NFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa-dfa" class="md-nav__link">
+    NFA 与 DFA 的等价性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    正则语言类在正则运算下的封闭性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 正则表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 正则表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    定义 (正则表达式)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    定义 (正则表达式表示的语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_3" class="md-nav__link">
+    正则表达式到 NFA 的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnfa" class="md-nav__link">
+    定义 (广义非确定型有穷自动机 (GNFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnfa_1" class="md-nav__link">
+    定义 (GNFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 非正则语言
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 非正则语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    定理 (正则语言的泵引理)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    本章小结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 有穷自动机
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 有穷自动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    初识有穷自动机
+  </a>
+  
+    <nav class="md-nav" aria-label="初识有穷自动机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    定义 (有穷自动机)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    定义 (确定型有穷自动机 (DFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_1" class="md-nav__link">
+    定义 (DFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    正则语言及其运算
+  </a>
+  
+    <nav class="md-nav" aria-label="正则语言及其运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    定义 (正则语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    定义 (正则语言的正则运算)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    定义 (正则语言的封闭性)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    定理 (正则语言的封闭性)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-nfa" class="md-nav__link">
+    1.2 非确定型有限状态自动机 (NFA)
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 非确定型有限状态自动机 (NFA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    非确定性
+  </a>
+  
+    <nav class="md-nav" aria-label="非确定性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfa-nfa" class="md-nav__link">
+    DFA 与 NFA 的区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa" class="md-nav__link">
+    定义 (NFA 的计算)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_1" class="md-nav__link">
+    定义 (非确定型有穷自动机 (NFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_2" class="md-nav__link">
+    定义 (NFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa-dfa" class="md-nav__link">
+    NFA 与 DFA 的等价性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    正则语言类在正则运算下的封闭性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 正则表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 正则表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    定义 (正则表达式)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    定义 (正则表达式表示的语言)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa_3" class="md-nav__link">
+    正则表达式到 NFA 的转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnfa" class="md-nav__link">
+    定义 (广义非确定型有穷自动机 (GNFA) 的形式化定义)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnfa_1" class="md-nav__link">
+    定义 (GNFA 计算的形式化定义)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 非正则语言
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 非正则语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    定理 (正则语言的泵引理)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    本章小结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/chuan-325/itc-20sp/edit/master/docs/chap_01.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="chapter-1">Chapter 1: 正则语言<a class="headerlink" href="#chapter-1" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 有穷自动机<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<h3 id="_1">初识有穷自动机<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">定义 (有穷自动机)<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>有穷自动机 (FSM/FA/DFA) 由有穷个状态组成. 它是一种简单且便于处理问题和计算的计算模型. 通常用状态图来表示 (也可以等价地用状态转移表表示) .</p>
+<p>状态 (转移) 图的要素: (1) 状态, (2) 转移.</p>
+<ul>
+<li>
+<p>状态: 一般是一个圈里一个字母 (<em>带下标</em>) 标识.</p>
+<ul>
+<li>特殊状态: 初始状态,接受状态 (以双圈表示).</li>
+<li>接受状态: 接受输入的字符串.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>转移: 箭头, 箭头线上标明了输入符号.</li>
+</ul>
+<p>"自动机在某个字符串上运行" : 输入带, 只读头, 状态控制器.</p>
+<blockquote>
+<p>e.g. 单向只读输入带, 单向只读头, 有穷状态控制器.</p>
+</blockquote>
+<h4 id="dfa">定义 (确定型有穷自动机 (DFA) 的形式化定义)<a class="headerlink" href="#dfa" title="Permanent link">&para;</a></h4>
+<p><em>确定性有穷状态机</em> (DFA) 是一个五元组</p>
+<div class="arithmatex">\[M=(Q,\Sigma,\delta,q_0,F)\]</div>
+<p>其中,</p>
+<ul>
+<li><span class="arithmatex">\(Q\)</span> 是一个有穷集合, 称为 <em>状态集</em> ;</li>
+<li><span class="arithmatex">\(\Sigma\)</span> 是一个有穷集合, 称为 <em>字母表</em> ;</li>
+<li><span class="arithmatex">\(\delta: Q\times\Sigma\mapsto Q\)</span> 是 <em>转移函数</em> (可以以列表等形式表示) ;</li>
+<li><span class="arithmatex">\(q_0\in Q\)</span> 是 <em>起始状态</em> ;</li>
+<li><span class="arithmatex">\(F\subseteq Q\)</span> 是 <em>接受状态集</em>, 也称 <em>终结状态</em> .</li>
+</ul>
+<h4 id="dfa_1">定义 (DFA 计算的形式化定义)<a class="headerlink" href="#dfa_1" title="Permanent link">&para;</a></h4>
+<p>设 <span class="arithmatex">\(M=(Q,\Sigma,\delta,q_0,F)\)</span> 是一个自动机, <span class="arithmatex">\(w=a_1a_2\cdots a_n\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的一个字符串, 如果存在 <span class="arithmatex">\(Q\)</span> 中的状态序列 <span class="arithmatex">\(s_1,s_2,\cdots ,s_n\)</span>, 使得下列条件满足:</p>
+<ul>
+<li><span class="arithmatex">\(s_0=q_0,\)</span></li>
+<li>对于任意 <span class="arithmatex">\(i\in\{0,1,2\cdots,n-1\}\)</span>, <span class="arithmatex">\(\delta(s_i,a_i)=s_{i+1},\)</span></li>
+<li><span class="arithmatex">\(s_n\in F,\)</span></li>
+</ul>
+<p>则称 <span class="arithmatex">\(M\)</span> 接受字符串 <span class="arithmatex">\(w.\)</span></p>
+<p><strong>机器的语言</strong>: 机器 <span class="arithmatex">\(M\)</span> 所接受的<em>全部</em>字符串的集合是机器 <span class="arithmatex">\(M\)</span> 的语言, 记为 <span class="arithmatex">\(L(M):=\{w\in\Sigma^* | \delta(q_0,w)\in F\}.\)</span> 为了区别起见, 一般采用 "<span class="arithmatex">\(M\)</span> <em>识别</em> 语言 <span class="arithmatex">\(L(M)\)</span>" 的提法</p>
+<blockquote>
+<p>注意:</p>
+<ul>
+<li>区别机器 "接受字符串" 与 "接受语言" .</li>
+<li>计算 <span class="arithmatex">\(L(M)\)</span> 时不要漏掉空串.</li>
+</ul>
+</blockquote>
+<p>有时, 将 <span class="arithmatex">\(\delta(q_i,a)=q_j\)</span> 写成 <span class="arithmatex">\(q_i\xrightarrow{a}q_j\)</span> , 这样, 上述形式化定义的第二条可以写作:</p>
+<div class="arithmatex">\[
+s_0\xrightarrow{a_0}s_1\xrightarrow{a_1}s_2\xrightarrow{a_2}s_3\cdots s_{n-1}\xrightarrow{a_{n-1}}s_n.
+\]</div>
+<h3 id="_3">正则语言及其运算<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">定义 (正则语言)<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>正则语言: 若一个语言可被一台 DFA 所接受, 则称它是正则语言.</p>
+<blockquote>
+<p>任何一个 DFA 接受的语言都是正则语言;</p>
+<p>对于任何一个正则语言 A, 必然存在一个 DFA M, 使得 A=<span class="arithmatex">\(L(M)\)</span>.</p>
+</blockquote>
+<h4 id="_5">定义 (正则语言的正则运算)<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>见<a href="../chap_00/#_6">绪论中的说明部分</a>. <!--语言的运算--></p>
+<h4 id="_6">定义 (正则语言的封闭性)<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如果任意两个语言的交仍然是一个正则语言, 则称正则语言关于交运算封闭;</li>
+<li>如果任意一个正则语言的补语言也是正则语言, 则称正则语言关于补运算封闭;</li>
+<li>类似地, 可定义正则语言关于并运算/ 连接运算及星运算的封闭性.</li>
+</ul>
+<blockquote>
+<p>Lecture 02: 非确定型有限状态自动机 (2020-02-28)</p>
+<p>内容提要: 正则语言运算的封闭性, NFA 的概念, NFA 和 DFA 的等价性, NFA 和 DFA 的相互转化.</p>
+</blockquote>
+<h4 id="_7">定理 (正则语言的封闭性)<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><strong>(定理 1.12) 正则语言类在并运算下是封闭的.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<ul>
+<li>对于任意的两个正则语言 <span class="arithmatex">\(A_1,A_2\)</span>, 构造一个 DFA <span class="arithmatex">\(M\)</span>, 使得 <span class="arithmatex">\(L(M)=A_1\cup A_2\)</span>.</li>
+<li>从接受正则语言 <span class="arithmatex">\(A_1,A_2\)</span> 的 DFA <span class="arithmatex">\(M_1,M_2\)</span>, 定义一个新的 DFA. 利用多元组这一形式化的数学工具.</li>
+<li>证明 <span class="arithmatex">\(L(M)=L(M_1)\cup L(M_2)\)</span>.<ul>
+<li>按照证明集合相等的常规思路, 分别证明两边互相 <span class="arithmatex">\(\subseteq\)</span> 另一边.</li>
+</ul>
+</li>
+</ul>
+<p><strong>(定理 1.13) 正则语言类在连接运算下封闭.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<ul>
+<li>模仿上一段的构造性证明, 我们想到基于任意的有穷自动机 <span class="arithmatex">\(M_1,M_2\)</span>, 造出一台有穷自动机 <span class="arithmatex">\(M\)</span>, 它识别的语言中的所有字符串都满足: <span class="arithmatex">\(M_1\)</span>接受 "第一段" 字符串, <span class="arithmatex">\(M_2\)</span>接受 "第二段" 字符串, 即 <span class="arithmatex">\(L(M)=L(M_1)\circ L(M_2)\)</span>.</li>
+<li>如何将输入分开?<ul>
+<li>引入非确定性.</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-nfa">1.2 非确定型有限状态自动机 (NFA)<a class="headerlink" href="#12-nfa" title="Permanent link">&para;</a></h2>
+<h3 id="_8">非确定性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h4 id="dfa-nfa">DFA 与 NFA 的区别<a class="headerlink" href="#dfa-nfa" title="Permanent link">&para;</a></h4>
+<ul>
+<li>非确定性: NFA 的状态转移存在 "一对多"<ul>
+<li>NFA 中, 一个状态对于字母表中的每一个符号可能有 <span class="arithmatex">\(0\)</span> 个/ <span class="arithmatex">\(1\)</span> 个/ 多个射出的箭头, 在 DFA 中则是恰好一个;</li>
+</ul>
+</li>
+<li><span class="arithmatex">\(\epsilon\)</span> 迁移: <span class="arithmatex">\(\epsilon\)</span> 不消耗计算符号.<ul>
+<li>NFA 中的箭头上可以标记字母表中的符号或<span class="arithmatex">\(\epsilon\)</span>, 在 DFA 中则没有<span class="arithmatex">\(\epsilon\)</span>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="nfa">定义 (NFA 的计算)<a class="headerlink" href="#nfa" title="Permanent link">&para;</a></h4>
+<p>对于一个字符串, 在一个 NFA 下可能同时存在成功的计算和不成功的计算.</p>
+<p>规定: 只要某个 NFA 对一个字符串 <em>存在</em> 一次能成功的计算, 则这个字符串就被这个 NFA 所接受.</p>
+<blockquote>
+<p>Nondeterminism creates many transition paths, but if there is one path leading to an accepting state, then the input is.</p>
+</blockquote>
+<p>一个 NFA <span class="arithmatex">\(M\)</span> 所接受的语言: 该 NFA <span class="arithmatex">\(M\)</span> 所接受的字符串的集合, 记作<span class="arithmatex">\(L(M)\)</span>.</p>
+<blockquote>
+<p>若两个自动机接受的语言相同, 则这两个自动机等价.</p>
+</blockquote>
+<h4 id="nfa_1">定义 (非确定型有穷自动机 (NFA) 的形式化定义)<a class="headerlink" href="#nfa_1" title="Permanent link">&para;</a></h4>
+<p>一个<strong>非确定型有穷自动机</strong>是一个五元组</p>
+<div class="arithmatex">\[M=(Q,\Sigma,\delta,q_0,F)\]</div>
+<p>其中,</p>
+<ul>
+<li><span class="arithmatex">\(Q\)</span> 是一个有限集合, 称为 <em>状态集</em> ;</li>
+<li><span class="arithmatex">\(\Sigma\)</span> 是一个有限非空集, 称为 <em>字母表</em> ;</li>
+<li><span class="arithmatex">\(\delta:Q\times\Sigma_{\epsilon}\mapsto2^Q\)</span> 是一个从<span class="arithmatex">\(Q\times\Sigma_{\epsilon}\)</span> 到 <span class="arithmatex">\(2^Q\)</span> 的函数, 这里 <span class="arithmatex">\(\Sigma_{\epsilon}=\Sigma\cup\{\epsilon\}\)</span>, <span class="arithmatex">\(2^Q\)</span> 是指 <span class="arithmatex">\(Q\)</span> 的幂集;</li>
+<li><span class="arithmatex">\(q_0\in Q\)</span> 是 <em>起始状态</em> ;</li>
+<li><span class="arithmatex">\(F\subseteq Q\)</span> 是 <em>接受状态集</em> .</li>
+</ul>
+<h4 id="nfa_2">定义 (NFA 计算的形式化定义)<a class="headerlink" href="#nfa_2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>设 <span class="arithmatex">\(w\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的一个字符串, <em>规定</em>在 <span class="arithmatex">\(w\)</span> 中增加有穷个 <span class="arithmatex">\(\epsilon\)</span> 后所得到的字符序列 <span class="arithmatex">\(y_0y_1\cdots y_n\)</span> (这里每个 <span class="arithmatex">\(y_i\in\Sigma_{\epsilon}\)</span>) 与 <span class="arithmatex">\(w\)</span> 相等.</p>
+<p>例如: <span class="arithmatex">\(10110=\epsilon\epsilon10\epsilon110\epsilon\)</span>.</p>
+</blockquote>
+<p>设 <span class="arithmatex">\(M=(Q,\Sigma,\delta,q_0,F)\)</span> 是一个 NFA, <span class="arithmatex">\(w\)</span> 是字母表 <span class="arithmatex">\(\Sigma\)</span> 上的一个字符串, 如果能把 <span class="arithmatex">\(w\)</span> 写成 <span class="arithmatex">\(w=y_0y_1\cdots y_{n-1}\)</span> (这里每个<span class="arithmatex">\(y_i\in\Sigma_{\epsilon}\)</span>) , 并且存在 <span class="arithmatex">\(Q\)</span> 中的状态序列 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_n\)</span> 使得下列条件满足:</p>
+<ul>
+<li><span class="arithmatex">\(s_0=q_0\)</span>;</li>
+<li><span class="arithmatex">\(\forall i\in\{0,1,2,\cdots,n-1\},s_{i+1}\in\delta(s_i,y_i)\)</span>;</li>
+<li><span class="arithmatex">\(s_n\in F\)</span>.</li>
+</ul>
+<p>则称 <span class="arithmatex">\(M\)</span> 接受 <span class="arithmatex">\(w\)</span>.</p>
+<p>记号: 称 <span class="arithmatex">\(L(M)=\{w|w\in\Sigma^*,\text{ 且 M 接受 }w\}\)</span> 是 <span class="arithmatex">\(M\)</span> 识别的语言.</p>
+<h3 id="nfa-dfa">NFA 与 DFA 的等价性<a class="headerlink" href="#nfa-dfa" title="Permanent link">&para;</a></h3>
+<p>比较 NFA 与 DFA 各自的特点, 就接受字符串的能力而言, NFA 与 DFA 的表达能力一样强.</p>
+<p><strong>(定理 1.19) 每一台非确定型有穷自动机都等价于一台确定型有穷自动机.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<ul>
+<li>设一个语言被一台 NFA 识别, 那么必须证明还有一台 DFA 能识别这个语言. 因此要设法把 NFA 转化为能够模拟它的 DFA.</li>
+</ul>
+<p>取一台 NFA <span class="arithmatex">\(N=(Q,\Sigma,\delta,q_0,F)\)</span>, 构造 DFA <span class="arithmatex">\(M=\{Q^{\prime},\Sigma,\delta^{\prime},E(\{q_0\}),F^{\prime}\}\)</span>, 思路如下:</p>
+<ul>
+<li><span class="arithmatex">\(Q^{\prime}=\mathcal{P}(Q)\)</span><ul>
+<li>考虑 NFA 的状态集 <span class="arithmatex">\(Q\)</span>, 从<a href="#nfa_1">NFA 的定义</a><!--#定义非确定型有穷自动机nfa的形式化定义-->出发, 让 <span class="arithmatex">\(Q\)</span> 的幂集 <span class="arithmatex">\(2^Q\)</span> 成为 DFA 的状态集</li>
+<li>不要忘了空集 <span class="arithmatex">\(\emptyset\)</span></li>
+</ul>
+</li>
+<li><span class="arithmatex">\(E(\{q_0\})\)</span><ul>
+<li><span class="arithmatex">\(E(R):=\{q|\text{从}R\text{ 出发, 沿着0个或多个 }\epsilon\text{ 箭头可以到达 }q\},R\subseteq Q\)</span></li>
+<li>注意: 转化过后的集合是一个状态 (看定义! )</li>
+</ul>
+</li>
+<li><span class="arithmatex">\(\delta^{\prime}(R,a)=\left\{q\in Q|\exists r\in R,s.t.q\in E(\delta(r,a))\right\},\forall R\in Q,a\in\Sigma.\)</span></li>
+<li><span class="arithmatex">\(F^{\prime}=\{R\in Q^{\prime}|R\text{ 包含 }N\text{ 的一个接受状态}\}\)</span><ul>
+<li>所有包含 <span class="arithmatex">\(F\)</span> 中状态的集合均在新的接受状态集里</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>手动把一个 DFA 转化成 NFA 的时候推荐这样做:</p>
+<ol>
+<li>获取新的状态集;</li>
+<li>确定新的起始状态和接受状态集;</li>
+<li>计算新的转移函数;</li>
+<li>去掉新的 DFA 中不需要的状态.</li>
+</ol>
+</blockquote>
+<p><strong>(推论 1.20) 一个语言是正则的, 当且仅当有一台 NFA 能识别这个语言.</strong></p>
+<blockquote>
+<p>Lecture 03: 正则语言的封闭性, 正则表达式 (2020-03-03)</p>
+<p>内容提要: 正则语言关于并/ 交/ 补/ 连接/ 星运算的封闭性, 正则表达式, 到正则表达式到 NFA 的转换.</p>
+</blockquote>
+<h3 id="_9">正则语言类在正则运算下的封闭性<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>正则语言的运算: 并/ 交/ 补/ 连接 (concatenation)/ 星号运算 (*) .</p>
+<p><strong>(定理 1.20) 正则语言类在并, 交, 补, 连接及星号运算下封闭.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<ul>
+<li>利用 DFA 可给出关于 <em>并</em>/ <em>交</em>/ <em>补</em> 运算的证明;</li>
+<li>利用 NFA 可给出关于 <em>并</em>/ <em>连接</em>/ <em>星</em> 运算的证明.</li>
+</ul>
+<p>将证明分割为三个引理的证明:</p>
+<p><strong>(定理 1.22) 正则语言类在并运算下封闭.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<p>对于任意两个正则语言, 要证明它们的并是正则的, 则会想到取识别它们的 NFA 来构造新的 NFA, 使之能够识别这个并.</p>
+<p><strong>(定理 1.23) 正则语言类在连接运算下封闭.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<p>对于任意两个正则语言, 要证明它们的连接是正则的, 则会想到取识别它们的 NFA 来构造新的 NFA, 使之能够识别这个连接.</p>
+<p><strong>(定理 1.24) 正则语言类在星号运算下封闭.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<p>利用能够识别正则语言<span class="arithmatex">\(A\)</span>的 NFA, 构造新的 NFA 使之能够识别<span class="arithmatex">\(A^*\)</span>.</p>
+<blockquote>
+<p><strong>关于构造</strong></p>
+<p>不太好的想法:</p>
+<ul>
+<li>把起始状态直接加入接受状态集中;</li>
+<li>这可能导致加进一些其他不想要的字符串;</li>
+</ul>
+<p>更好的想法:</p>
+<ul>
+<li>添加一个新的起始状态, 同时也是接受状态, 并且有一个指向原起始状态的 <span class="arithmatex">\(\epsilon\)</span> 箭头.</li>
+<li>这个方案可以做到 "在识别的语言中加入 <span class="arithmatex">\(\epsilon\)</span> 而不加入其他任何字符串" , 这也是我们构造性证明的关键.</li>
+</ul>
+</blockquote>
+<h2 id="13">1.3 正则表达式<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<h4 id="_10">定义 (正则表达式)<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>DFA 和 NFA 都是正则语言的表达方式, <em>正则表达式</em>则是正则语言的另一种表达方式.</p>
+</blockquote>
+<p>设 <span class="arithmatex">\(\Sigma\)</span> 是一个字母表, <span class="arithmatex">\(\Sigma\)</span> 上的 <strong>正则表达式</strong> 定义如下:</p>
+<p>(注意: 后两条是 <em>递归定义</em> )</p>
+<ul>
+<li><span class="arithmatex">\(\epsilon\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> ;</li>
+<li><span class="arithmatex">\(\emptyset\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> ;</li>
+<li>如果 <span class="arithmatex">\(a\in\Sigma\)</span>, 则 <span class="arithmatex">\(a\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> ;</li>
+<li>如果 <span class="arithmatex">\(R_1\)</span> 和 <span class="arithmatex">\(R_2\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> , 那么 <span class="arithmatex">\((R_1\cup R_2)\)</span> 和 <span class="arithmatex">\((R_1\circ R_2)\)</span> 也是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> ;</li>
+<li>如果 <span class="arithmatex">\(R\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的 <em>正则表达式</em> , 则 <span class="arithmatex">\((R^∗)\)</span> 也是<span class="arithmatex">\(\Sigma\)</span>上的 <em>正则表达式</em> .</li>
+</ul>
+<p>其中, <span class="arithmatex">\(\cup,\circ,*\)</span> 分别称为<strong>并</strong>运算符/ <strong>连接</strong>运算符/ <strong>星号</strong>运算符.</p>
+<blockquote>
+<p>关于运算符的几点说明:</p>
+<ol>
+<li>在不混淆的情况下, 有些括弧可以省略;</li>
+<li>运算优先级: 无括弧时, <span class="arithmatex">\(*\)</span> 优先于 <span class="arithmatex">\(\circ\)</span>, <span class="arithmatex">\(\circ\)</span> 优先于 <span class="arithmatex">\(\cup\)</span>;</li>
+<li>连接运算符号<span class="arithmatex">\(\circ\)</span>可省略, 如 <span class="arithmatex">\(R^{+}=R\circ(R^{∗})=RR^{∗}\)</span>.</li>
+</ol>
+<p>显然地, 正则表达式关于并/ 连接/ 星号运算是封闭的.</p>
+</blockquote>
+<p>一个字母表上的任意一个正则表达式 <span class="arithmatex">\(R\)</span> 都表示了该字母表上的一个语言 (<em>字符串的集合</em>) . 此外, 正则表达式的 <em>递归定义方式</em> 暗示我们, 它是由 <em>有穷个</em> 符号的运算得到的.</p>
+<p>后面我们还将证明正则表达式表示的语言都是正则语言.</p>
+<blockquote>
+<p>注意正则表达式带有<span class="arithmatex">\(\cup,\circ\)</span>的运算:</p>
+<ol>
+<li>将空语言加到任一语言上不会改变这个语言, 将空串加到任一字符串上不会改变这个字符串, 所以有<strong>恒等式</strong>: <span class="arithmatex">\(R\cup\emptyset=R， R\circ\epsilon=R,\)</span></li>
+<li>但若将两个符号换位, 则新的式子未必成立. 比如说, 有的语言中可能没有空串 <span class="arithmatex">\(\epsilon\)</span> , 并且所有语言跟空语言 <span class="arithmatex">\(\emptyset\)</span> 连接都会得到空语言 <span class="arithmatex">\(\emptyset\)</span> .</li>
+</ol>
+<p>在<a href="#nfa_3">正则表达式到 NFA 的转换</a><!--#正则表达式到nfa的转换-->的一个证明中提到过正则表达式的定义.</p>
+</blockquote>
+<h4 id="_11">定义 (正则表达式表示的语言)<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>正则表达式 <span class="arithmatex">\(R\)</span> 表示的 <strong>语言</strong> <span class="arithmatex">\(L(R)\)</span> 递归定义如下:</p>
+<ul>
+<li><span class="arithmatex">\(L(\epsilon)=\{\epsilon\}\)</span>;</li>
+<li><span class="arithmatex">\(L(\emptyset)=\emptyset\)</span>;</li>
+<li>对于 <span class="arithmatex">\(a\in\Sigma,L(a)=\{a\}\)</span>;</li>
+<li><span class="arithmatex">\(L(R_1\cup R_2)=L(R_1)\cup L(R_2)\)</span>;</li>
+<li><span class="arithmatex">\(L(R_1\circ R_2)=L(R_1)\circ L(R_2)\)</span>;</li>
+<li><span class="arithmatex">\(L(R^{\text{*}})=(L(R))^{\text{*}}\)</span>.</li>
+</ul>
+<blockquote>
+<p>正则表达式 <span class="arithmatex">\(R\)</span>, 常常与它表示的语言混用, 不加区分. 比如 <span class="arithmatex">\(1\circ(0\cup 1)=\{10,11\}\)</span>. 但当想要明显地区分正则表达式 <span class="arithmatex">\(R\)</span>和它所表示的语言时, 把 <span class="arithmatex">\(R\)</span>表示的语言写成 <span class="arithmatex">\(L(R)\)</span>.</p>
+<p>不要混淆正则表达式 <span class="arithmatex">\(\epsilon\)</span> 和 <span class="arithmatex">\(\emptyset\)</span>,表达式 <span class="arithmatex">\(\epsilon\)</span>表示只含空串的语言 (<span class="arithmatex">\(\epsilon\)</span> 里面还是有 "空串" 这一个东西的, 而 <span class="arithmatex">\(\emptyset\)</span> 就真的一滴都不剩啦) .</p>
+</blockquote>
+<h4 id="nfa_3">正则表达式到 NFA 的转换<a class="headerlink" href="#nfa_3" title="Permanent link">&para;</a></h4>
+<p><strong>(定理) 设 <span class="arithmatex">\(R\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的任意一个正则表达式, 则存在 <span class="arithmatex">\(\Sigma\)</span> 上的一个 NFA <span class="arithmatex">\(N_R\)</span>, 使得 <span class="arithmatex">\(L(R)=L(N_R)\)</span>.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<p>归纳证明, 对<a href="#_10">正则表达式的定义</a><!--#定义正则表达式-->中的每一条构造对应的 NFA.</p>
+<p>由以上的定理可以得到:</p>
+<p><strong>(引理 1.29) 如果一个语言可以用正则表达式描述, 那么它是正则语言.</strong></p>
+<p>i.e 正则表达式表达的语言 <span class="arithmatex">\(\subseteq\)</span> 正则语言.</p>
+<p><em>证明 (思路) :</em></p>
+<p>构造变换 "RE to NFA" .</p>
+<p>假设正则表达式 <span class="arithmatex">\(R\)</span> 描述某语言 <span class="arithmatex">\(A\)</span>. 要证明该语言是正则的, 则需要构造一台能够识别该语言的 NFA, 即 "将正则表达式 <span class="arithmatex">\(R\)</span> 转换成一台识别语言 <span class="arithmatex">\(A\)</span> 的 NFA" .</p>
+<ul>
+<li><span class="arithmatex">\(R=a,R=\epsilon,R=\emptyset\)</span> 的情况下, 均能举出非常简单的 NFA 作为构造;</li>
+<li><span class="arithmatex">\(R=R_1\cup R_2,R=R_1\circ R_2,R=R_1^*\)</span> 的情况下, 使用正则语言类在正则运算下封闭的证明中所给出的构造 (即用识别 <span class="arithmatex">\(R_1,R_2\)</span> 的 NFA 构造出关于 <span class="arithmatex">\(R\)</span> 的 NFA) .</li>
+</ul>
+<p><strong>注意</strong>: 并/ 连接/ 星号三种运算所对应的 "RE to NFA" 变换方式的细节. 比如, 并运算使用两个 <span class="arithmatex">\(\epsilon\)</span> 实现了分路, 连接运算中约定地引入了 <span class="arithmatex">\(\epsilon\)</span> 迁移, 星号运算常常会把循环中的首个状态分成 <strong>"接收状态 ×1+ <span class="arithmatex">\(\epsilon\)</span> 迁移 ×1"</strong> 的形式.</p>
+<blockquote>
+<p>Lecture 04: 正则表达式 (续)/ 非正则语言 (2020-03-06)</p>
+<p>内容提要: NFA 到正则表达式的转换, 非正则语言 (非正则语言的泵引理)</p>
+</blockquote>
+<p><strong>(引理 1.32) 如果一个语言是正则语言, 那么可以用正则表达式来描述它.</strong></p>
+<p><em>证明 (思路) :</em></p>
+<p>构造变换 "NFA to RE" .</p>
+<blockquote>
+<p>要将 NFA 转换成等价的正则表达式, 可以从简单的情况开始考虑:</p>
+<ul>
+<li>简单的连续状态 <span class="arithmatex">\(\leftrightarrow\)</span> NFA 的连接</li>
+<li>循环结构 <span class="arithmatex">\(\leftrightarrow\)</span> NFA 的星号运算</li>
+<li>双路结构 <span class="arithmatex">\(\leftrightarrow\)</span> NFA 的并运算</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>Step 1</strong>
+  对 M 增加新的初始状态 <span class="arithmatex">\(q_{\text{start}}\)</span> 和新的接受状态 <span class="arithmatex">\(q_{\text{accept}}\)</span> ,添加从 <span class="arithmatex">\(q_{\text{start}}\)</span> 到原初始状态, 和从原接受状态到 <span class="arithmatex">\(q_{\text{accept}}\)</span> 的 <span class="arithmatex">\(\epsilon\)</span> 迁移, 并使 <span class="arithmatex">\(q_{\text{accept}}\)</span> 成为新 NFA 的唯一接受状态.</li>
+<li><strong>Step 2</strong>
+  合并自动机中出发状态和到达状态都相同的迁移, 使得除 <span class="arithmatex">\(q_{\text{start}}\)</span> 和 <span class="arithmatex">\(q_{\text{accept}}\)</span> 之外, 从一个状态到自身和到另外的状态有且只能有一条迁移.</li>
+<li><strong>Step 3</strong>
+  使用前面在引用区讨论过的那种思路 (使用并运算等) 逐步删掉除 <span class="arithmatex">\(q_{\text{start}}\)</span> 和 <span class="arithmatex">\(q_{\text{accept}}\)</span> 之外的所有结点, 剩下的唯一一条从 <span class="arithmatex">\(q_{\text{start}}\)</span> 到 <span class="arithmatex">\(q_{\text{accept}}\)</span> 的迁移上标注的正则表达式就是所要的结果.</li>
+</ul>
+<p>结合 <em>引理 1.29</em> 与 <em>引理 1.32</em> , 可以得到</p>
+<p><strong>(定理 1.28) 一个语言是正则的, 当且仅当可以用正则表达式来描述它.</strong></p>
+<p>在刚刚 <em>引理 1.32</em> 的证明中, 出现了一类新的自动机: <strong>广义非确定型自动机</strong>.</p>
+<h4 id="gnfa">定义 (广义非确定型有穷自动机 (GNFA) 的形式化定义)<a class="headerlink" href="#gnfa" title="Permanent link">&para;</a></h4>
+<p>一个 <strong>GNFA</strong> 是一个五元组 <span class="arithmatex">\(M=(Q,\Sigma,\delta,q_{\text{start}},q_{\text{accept}})\)</span> , 其中,</p>
+<ul>
+<li><span class="arithmatex">\(Q\)</span> 是一个有限集合, 称为 <em>状态集</em> ;</li>
+<li><span class="arithmatex">\(\Sigma\)</span> 是一个有限非空集, 称为 <em>字母表</em> ;</li>
+<li><span class="arithmatex">\(\delta:(Q\backslash\{q_{\text{accept}}\})\times(Q\backslash\{q_{\text{start}}\})\mapsto RE(\Sigma)\)</span> 是迁移函数, 这里的 <span class="arithmatex">\(RE(\Sigma)\)</span> 表示 <span class="arithmatex">\(\Sigma\)</span> 上所有正则表达式的集合;<ul>
+<li>这个迁移函数和之前略有不同, 表示的是某一正则表达式对应两个状态之间的跳转进程;</li>
+<li><span class="arithmatex">\(Q\)</span> 中去掉起始状态/接受状态的操作, 其实就是对 GNFA 定义的重申, 强调了自动机接受字符串后的运行顺序;</li>
+</ul>
+</li>
+<li><span class="arithmatex">\(q_{\text{start}}\in Q\)</span> 是 <em>起始状态</em> ;</li>
+<li><span class="arithmatex">\(q_{\text{accept}}\in Q\)</span> 是 <em>接受状态</em> .</li>
+</ul>
+<h4 id="gnfa_1">定义 (GNFA 计算的形式化定义)<a class="headerlink" href="#gnfa_1" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>设 <span class="arithmatex">\(w\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 上的一个字符串, <em>规定</em> 在 <span class="arithmatex">\(w\)</span> 中增加有穷个 <span class="arithmatex">\(\epsilon\)</span> 后所得到的字符序列 <span class="arithmatex">\(y_0y_1\cdots y_n\)</span> (这里每个 <span class="arithmatex">\(y_i\in\Sigma_{\epsilon}\)</span> ) 与 <span class="arithmatex">\(w\)</span> 相等.
+例如: <span class="arithmatex">\(10110=\epsilon\epsilon10\epsilon110\epsilon\)</span>.</p>
+</blockquote>
+<p>设 <span class="arithmatex">\(M=(Q,\Sigma,\delta,q_{\text{start}},q_{\text{accept}})\)</span> 是一个 GNFA, <span class="arithmatex">\(w\in\Sigma^*\)</span>, 如果能把<span class="arithmatex">\(w\)</span>写成<span class="arithmatex">\(w=w_0w_1\cdots w_{n-1}\)</span> (这里每个<span class="arithmatex">\(y_i\in\Sigma_{\epsilon}\)</span>) , 并且存在 <span class="arithmatex">\(Q\)</span> 中的状态序列 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_n\)</span> 使得下列条件满足:</p>
+<ul>
+<li><span class="arithmatex">\(s_0=q_{\text{start}}\)</span>;</li>
+<li>对于任意 <span class="arithmatex">\(i\in\{0,1,2,\cdots,n-1\},w_i\in L(\delta(s_i,s_{i+1}))\)</span>;</li>
+<li><span class="arithmatex">\(s_n=q_{\text{accept}}\)</span>.</li>
+</ul>
+<p>则称 <span class="arithmatex">\(M\)</span> 接受 <span class="arithmatex">\(w\)</span>.</p>
+<blockquote>
+<p>基于 DFA (或者 NFA) 的 GNFA 构造过程, 就是在做题的时候喜闻乐见的 "to RE" 过程.</p>
+</blockquote>
+<p>到这里, 我们可以得出这样的结论: <strong>正则语言 = DFA 接受的语言 = NFA 接受的语言 = 正则表达式表示的语言</strong> .</p>
+<h2 id="14">1.4 非正则语言<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<h4 id="_12">定理 (正则语言的泵引理)<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>(<strong>泵引理</strong>) 对于任意的 (无穷) 正则语言 <span class="arithmatex">\(A\)</span>, 存在正整数 <span class="arithmatex">\(p\)</span> (<span class="arithmatex">\(p\)</span> 称为泵长度) ,使得对于任意 <span class="arithmatex">\(w\in A\)</span>, 如果 <span class="arithmatex">\(|w|\geq p\)</span>, 则 <span class="arithmatex">\(w\)</span> 可被分成 <span class="arithmatex">\(3\)</span> 段, 即 <span class="arithmatex">\(w=xyz\)</span>, 且</p>
+<ul>
+<li><span class="arithmatex">\(|y|\geq 1\)</span>;</li>
+<li><span class="arithmatex">\(|xy|\leq p\)</span>;</li>
+<li>对于任意 <span class="arithmatex">\(n\geq0\)</span>, <span class="arithmatex">\(xy^nz\in A\)</span>.</li>
+</ul>
+<p><em>证明 (思路) :</em> 证明应用了鸽笼原理.</p>
+<p>(应用定理) 由于 <span class="arithmatex">\(A\)</span> 是正则语言, 故存在一个 DFA <span class="arithmatex">\(M=(Q,\Sigma,\delta,q_0,F)\)</span>, 使得 <span class="arithmatex">\(A=L(M)\)</span>. 取 <span class="arithmatex">\(p=|Q|\)</span>, 则 <span class="arithmatex">\(p\in\mathbb{N}^+\)</span>.</p>
+<p>(应用定义) 设 <span class="arithmatex">\(w\in A\)</span> 且 <span class="arithmatex">\(|w|\geq p\)</span>, 令 <span class="arithmatex">\(w=a_1a_2\cdots a_{m-1}\)</span>, 于是存在 <span class="arithmatex">\(Q\)</span> 中的状态序列 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_m\)</span> 使得</p>
+<ol>
+<li><span class="arithmatex">\(s_0=q_0\)</span>,</li>
+<li>对于任意 <span class="arithmatex">\(i\in\{0,1,2,\cdots,m-1\},\delta(s_i,a_i)=s_{i+1}\)</span>,</li>
+<li><span class="arithmatex">\(s_m\in F\)</span>.</li>
+</ol>
+<p>状态序列 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_m\)</span> 的长度为 <span class="arithmatex">\(m+1=|w|+1\geq p+1\)</span>, 而 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_m\)</span> 全部都在 <span class="arithmatex">\(Q\)</span> 中, 且 <span class="arithmatex">\(Q\)</span> 中所有状态的总个数为 <span class="arithmatex">\(p\)</span>.</p>
+<p>由鸽笼原理可知, 在序列 <span class="arithmatex">\(s_0,s_1,s_2,\cdots,s_p\)</span> 之中, 必然存在 <span class="arithmatex">\(s_i=s_j,i\neq j,1\leq i,j\leq p\)</span>.</p>
+<p>于是, 在 <span class="arithmatex">\(M\)</span> 接受 <span class="arithmatex">\(w\)</span> 的计算路径中必然出现一个环 (即 <span class="arithmatex">\(s_i\)</span> 与 <span class="arithmatex">\(s_j\)</span> 之间的过程) .</p>
+<blockquote>
+<p>泵引理给出的是某种语言正则的<strong>必要条件</strong>. (不是充分!)</p>
+</blockquote>
+<h2 id="_13">本章小结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<ul>
+<li>主要概念 (是如何定义的? )<ul>
+<li>正则语言, DFA, NFA, 正则表达式.</li>
+</ul>
+</li>
+<li>主要结论 (是如何证明的? )<ul>
+<li>正则语言类 = DFA 接受的语言类 = NFA 接受的语言类 = 正则表达式表示的语言类</li>
+</ul>
+</li>
+<li>主要转换算法<ul>
+<li>NFA to DFA, RE to NFA, NFA to RE</li>
+</ul>
+</li>
+<li>正则语言关于并/ 交/ 补/ 连接及星号运算的封闭性<ul>
+<li>用 DFA 构造正则语言的并/ 交/ 补运算</li>
+<li>用 NFA 构造正则语言的并/ 连接/ 星号运算</li>
+</ul>
+</li>
+<li>归纳定义和归纳证明的方法<ul>
+<li>如 RE 的定义/ RE 表示的语言/ 以及 RE to NFA 的转换过程</li>
+</ul>
+</li>
+<li>泵引理及简单应用 (证明非正则性)</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../chap_00/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              Chapter 00 绪论
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.65ce87ac.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
